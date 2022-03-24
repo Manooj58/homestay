@@ -28,8 +28,13 @@ class _ProfileState extends State<Profile> {
           actions: [
             FlatButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => logIn()));
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => logIn(),
+                    ),
+                    (Route<dynamic> route) => false,
+                  );
                 },
                 child:
                     Text('Yes', style: Theme.of(context).textTheme.bodyText2)),

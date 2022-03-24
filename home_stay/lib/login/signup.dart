@@ -354,10 +354,13 @@ one uupercase letter and one digit ''';
                       _key.currentState!.save();
                       print(emailController.text);
                       print(passwordController.text);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyHomePage()));
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyHomePage(),
+                        ),
+                        (Route<dynamic> route) => false,
+                      );
                     }
                     // ? Navigator.push(
                     //     context,
@@ -398,11 +401,12 @@ one uupercase letter and one digit ''';
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
                             builder: (context) => logIn(),
                           ),
+                          (Route<dynamic> route) => false,
                         );
                       },
                     )
