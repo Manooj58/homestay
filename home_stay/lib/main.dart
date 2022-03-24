@@ -6,6 +6,7 @@ import '../pages/main_home.dart';
 import '../onboarding/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './colors/colors.dart';
+import './login/login.dart';
 
 int? initScreen;
 
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: initScreen == 0 || initScreen == null ? "first" : "/",
       routes: {
-        '/': (context) => MyHomePage(),
+        '/': (context) => logIn(),
         "first": (context) => Home(),
       },
     );
