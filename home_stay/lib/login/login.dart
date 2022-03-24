@@ -16,6 +16,7 @@ class _logInState extends State<logIn> {
   final passwordController = TextEditingController();
   bool isPasswordVisible = false;
   int borderRadius = 10;
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
   @override
   void dispose() {
     emailController.dispose();
@@ -63,80 +64,128 @@ class _logInState extends State<logIn> {
 
               // ------------->container for email<-------------------------//
 
-              Container(
-                margin: EdgeInsets.fromLTRB(
-                    0, MediaQuery.of(context).size.height * 0.025, 0, 0),
-                padding: const EdgeInsets.all(10),
-                child: TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                          BorderSide(color: Theme.of(context).primaryColor),
+              Form(
+                key: _key,
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(
+                          0, MediaQuery.of(context).size.height * 0.025, 0, 0),
+                      padding: const EdgeInsets.all(10),
+                      child: TextFormField(
+                        controller: emailController,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          prefixIcon: Icon(Icons.mail),
+                          labelText: 'Email',
+                          // hintText: 'username123@gmail.com',
+                          hintStyle: GoogleFonts.lato(
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          isDense: true,
+                          contentPadding: EdgeInsets.all(10),
+                        ),
+                        style: GoogleFonts.lato(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value == null || value.isEmpty)
+                            return 'Field is Empty';
+                          String pattern = r'\w+@\w+\.\w+';
+                          if (!RegExp(pattern).hasMatch(value))
+                            return 'Invalid E-mail Address format';
+                          String capital = r'^(?=.*[A-Z])';
+                          if (RegExp(capital).hasMatch(value))
+                            return 'Email Address doesn\'t contain Uppercase';
+                          return null;
+                        },
+                      ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                          BorderSide(color: Theme.of(context).primaryColor),
-                    ),
-                    prefixIcon: Icon(Icons.mail),
-                    labelText: 'Email',
-                    // hintText: 'username123@gmail.com',
-                    hintStyle: GoogleFonts.lato(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    isDense: true,
-                    contentPadding: EdgeInsets.all(10),
-                  ),
-                  style: GoogleFonts.lato(
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  textInputAction: TextInputAction.done,
-                  keyboardType: TextInputType.emailAddress,
-                ),
-              ),
 
-              // ----------->container for the password<---------------//
+                    // ----------->container for the password<---------------//
 
-              Container(
-                padding: const EdgeInsets.all(10),
-                margin: EdgeInsets.fromLTRB(
-                    0, MediaQuery.of(context).size.height * 0.025, 0, 0),
-                child: TextField(
-                  controller: passwordController,
-                  obscureText: !isPasswordVisible,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                          BorderSide(color: Theme.of(context).primaryColor),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      margin: EdgeInsets.fromLTRB(
+                          0, MediaQuery.of(context).size.height * 0.025, 0, 0),
+                      child: TextFormField(
+                        controller: passwordController,
+                        obscureText: !isPasswordVisible,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          prefixIcon: Icon(Icons.key),
+                          suffixIcon: IconButton(
+                            icon: isPasswordVisible
+                                ? Icon(Icons.visibility_off)
+                                : Icon(Icons.visibility),
+                            onPressed: () {
+                              setState(
+                                  () => isPasswordVisible = !isPasswordVisible);
+                            },
+                          ),
+                          labelText: 'Password',
+                          hintStyle: GoogleFonts.lato(
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          isDense: true,
+                          contentPadding: EdgeInsets.all(10),
+                        ),
+                        style: GoogleFonts.lato(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        textInputAction: TextInputAction.done,
+                        validator: (value) {
+                          if (value == null || value.isEmpty)
+                            return 'Password cannot be Empty';
+                          String pattern =
+                              r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{5,}$';
+                          if (!RegExp(pattern).hasMatch(value))
+                            return '''Password must have at least 5 characters,
+one uupercase letter and one digit ''';
+                        },
+                      ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                          BorderSide(color: Theme.of(context).primaryColor),
-                    ),
-                    prefixIcon: Icon(Icons.key),
-                    suffixIcon: IconButton(
-                      icon: isPasswordVisible
-                          ? Icon(Icons.visibility_off)
-                          : Icon(Icons.visibility),
-                      onPressed: () {
-                        setState(() => isPasswordVisible = !isPasswordVisible);
-                      },
-                    ),
-                    labelText: 'Password',
-                    hintStyle: GoogleFonts.lato(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    isDense: true,
-                    contentPadding: EdgeInsets.all(10),
-                  ),
-                  style: GoogleFonts.lato(
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  textInputAction: TextInputAction.done,
+                  ],
                 ),
               ),
 
@@ -157,10 +206,15 @@ class _logInState extends State<logIn> {
                     style: GoogleFonts.lato(),
                   ),
                   onPressed: () {
-                    print(emailController.text);
-                    print(passwordController.text);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MyHomePage()));
+                    if (_key.currentState!.validate()) {
+                      _key.currentState!.save();
+                      print(emailController.text);
+                      print(passwordController.text);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyHomePage()));
+                    }
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
