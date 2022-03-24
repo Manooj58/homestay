@@ -117,7 +117,7 @@ class _logInState extends State<logIn> {
                             return 'Invalid E-mail Address format';
                           String capital = r'^(?=.*[A-Z])';
                           if (RegExp(capital).hasMatch(value))
-                            return 'Email Address doesn\'t contain Uppercase';
+                            return 'Email Address mustn\'t contain Uppercase';
                           return null;
                         },
                       ),

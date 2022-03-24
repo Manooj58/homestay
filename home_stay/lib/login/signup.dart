@@ -149,7 +149,7 @@ class _signUpState extends State<signUp> {
                             return 'Invalid E-mail Address format';
                           String capital = r'^(?=.*[A-Z])';
                           if (RegExp(capital).hasMatch(value))
-                            return 'Email Address shouldn\'t contain Uppercase';
+                            return 'Email Address mustn\'t contain Uppercase';
                           return null;
                         },
                       ),

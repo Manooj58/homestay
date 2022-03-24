@@ -4,6 +4,7 @@ import './homepage.dart';
 import './onboarding_page.dart';
 import '../main.dart';
 import '../colors/colors.dart';
+import '../login/login.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _HomeState extends State<Home> {
       debugShowCheckedModeBanner: false,
       home: OnBoardingPage(),
       routes: {
-        homePage.routeName: (Ctx) => MyHomePage(),
+        homePage.routeName: (Ctx) => logIn(),
       },
     );
   }
