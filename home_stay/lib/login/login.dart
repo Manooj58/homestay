@@ -176,7 +176,7 @@ class _logInState extends State<logIn> {
                         textInputAction: TextInputAction.done,
                         validator: (value) {
                           if (value == null || value.isEmpty)
-                            return 'Password cannot be Empty';
+                            return 'Password can\'t be Empty';
                           String pattern =
                               r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{5,}$';
                           if (!RegExp(pattern).hasMatch(value))

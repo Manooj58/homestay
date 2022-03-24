@@ -37,7 +37,7 @@ class _signUpState extends State<signUp> {
               style: Theme.of(context).textTheme.bodyText2,
             ),
             content: Text(
-              "The re-entered password doesn\'t match with the password",
+              "The re-entered password doesn/'t match with the password",
               style: Theme.of(context).textTheme.bodyText2,
             ),
             actions: [
@@ -149,7 +149,7 @@ class _signUpState extends State<signUp> {
                             return 'Invalid E-mail Address format';
                           String capital = r'^(?=.*[A-Z])';
                           if (RegExp(capital).hasMatch(value))
-                            return 'Email Address doesn\'t contain Uppercase';
+                            return 'Email Address shouldn\'t contain Uppercase';
                           return null;
                         },
                       ),
@@ -259,7 +259,7 @@ class _signUpState extends State<signUp> {
                         textInputAction: TextInputAction.done,
                         validator: (value) {
                           if (value == null || value.isEmpty)
-                            return 'Password cannot be Empty';
+                            return 'Password can\'t be Empty';
                           String pattern =
                               r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{5,}$';
                           if (!RegExp(pattern).hasMatch(value))
@@ -324,7 +324,7 @@ one uupercase letter and one digit ''';
                           if (value == null || value.isEmpty)
                             return 'Password cannot be Empty';
                           if (passwordController.text != value)
-                            return 'Password doent match';
+                            return 'Password doesn\'t match';
                           return null;
                         },
                       ),
